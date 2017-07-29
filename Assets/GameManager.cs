@@ -12,19 +12,6 @@ public class GameManager : MonoBehaviour
     public string startScene, uiScene, endScene;
     public Level currLvl;
 
-    float _powerLevel;
-    public float powerLevel
-    {
-        get
-        {
-            return _powerLevel;
-        }
-        set
-        {
-            _powerLevel = value;
-        }
-    }
-
     // Use this for initialization
     void Awake()
     {
