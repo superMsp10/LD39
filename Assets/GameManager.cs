@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager thisM;
     public int levelNum = -1;
@@ -11,9 +12,23 @@ public class GameManager : MonoBehaviour {
     public string startScene, uiScene, endScene;
     public Level currLvl;
 
-	// Use this for initialization
-	void Awake () {
-		if (thisM == null)
+    float _powerLevel;
+    public float powerLevel
+    {
+        get
+        {
+            return _powerLevel;
+        }
+        set
+        {
+            _powerLevel = value;
+        }
+    }
+
+    // Use this for initialization
+    void Awake()
+    {
+        if (thisM == null)
         {
             thisM = this;
             DontDestroyOnLoad(this);
@@ -22,7 +37,7 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(this);
         }
-	}
+    }
 
     public void restartLevel()
     {
