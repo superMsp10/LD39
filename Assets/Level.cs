@@ -68,7 +68,7 @@ public class Level : MonoBehaviour
         InvokeRepeating("randomOrder", 5f, OrderInterval);
         InvokeRepeating("powerInput", 5f, PowerInterval);
 
-        //houses = FindObjectsOfType<House>();
+        houses = FindObjectsOfType<House>();
         //powerSources = new List<PowerSource>(FindObjectsOfType<PowerSource>());
     }
 
