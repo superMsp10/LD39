@@ -67,7 +67,7 @@ public class Cannon : MonoBehaviour
 
     }
 
-    void endHold()
+    public virtual void endHold()
     {
         //Apply Force
         float force = 0f;

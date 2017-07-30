@@ -29,7 +29,7 @@ public class Level : MonoBehaviour
     }
 
 
-    float _money = 100;
+    float _money = 10000;
     public float moneyPerPackage = 1;
 
     public float money
