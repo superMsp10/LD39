@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public string startScene, uiScene, endScene;
     public Level currLvl;
     public int loseComplaintNum = 5;
-    public int totalComplaints = 0;
+    public int totalComplaints, totalOrders, totalDeliveries, totalPower;
 
     // Use this for initialization
     void Awake()
@@ -24,13 +24,15 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
-    public void Lose()
+    void Update()
     {
-        
+        if (Input.GetKeyUp(KeyCode.F5)){
+            restartLevel();
+        }
     }
 
     public void restartLevel()

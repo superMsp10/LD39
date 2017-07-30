@@ -53,6 +53,11 @@ public class Level : MonoBehaviour
 
     public List<PowerSource> powerSources;
 
+    public Text totalOrders, complaints, time, dps, tpc;
+
+    public GameObject loseCanvas;
+    public int currentComplaints;
+
     void Start()
     {
         thisM = GameManager.thisM;
@@ -69,6 +74,14 @@ public class Level : MonoBehaviour
 
     public void randomOrder()
     {
+        foreach (var item in houses)
+        {
+            var diff = item.ordered - GameManager.thisM.currLvl.complainOrderNum;
+            if (diff > 0)
+                currentComplaints += diff;
+        }
+
+        if (currentComplaints >= GameManager.thisM.loseComplaintNum) Lose();
 
         Debug.Log("Order Step: " + ordersAmountLevel);
         for (int i = 0; i < ordersAmountLevel; i++)
@@ -95,11 +108,23 @@ public class Level : MonoBehaviour
             if (_powerLevel < maxPowerLevel)
             {
                 powerLevel += item.powerIncrement;
+                GameManager.thisM.totalPower += (int)item.powerIncrement;
             }
             else
             {
                 break;
             }
         }
+    }
+
+    public void Lose()
+    {
+        loseCanvas.SetActive(true);
+        CancelInvoke();
+        totalOrders.text = GameManager.thisM.totalOrders.ToString();
+        complaints.text = GameManager.thisM.totalComplaints.ToString();
+        time.text = Time.time.ToString();
+        dps.text = (GameManager.thisM.totalDeliveries/ Time.time).ToString();
+        tpc.text = GameManager.thisM.totalPower.ToString();
     }
 }

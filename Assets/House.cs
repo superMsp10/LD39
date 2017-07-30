@@ -7,7 +7,7 @@ public class House : MonoBehaviour
     public GameObject exclamationMark;
     public Material exclamation_black;
     public Material exclamation_red;
-    int ordered = 0;
+   public int ordered = 0;
 
     // Use this for initialization
     void Start()
@@ -34,6 +34,7 @@ public class House : MonoBehaviour
     public void packageReceived()
     {
         GameManager.thisM.currLvl.money += GameManager.thisM.currLvl.moneyPerPackage;
+        GameManager.thisM.totalDeliveries++;
         exclamationMark.SetActive(false);
         ordered = 0;
     }
@@ -41,6 +42,7 @@ public class House : MonoBehaviour
     public void Order()
     {
         ordered ++;
+        GameManager.thisM.totalOrders++;
         exclamationMark.SetActive(true);
 
         if(ordered >= GameManager.thisM.currLvl.complainOrderNum)
