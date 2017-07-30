@@ -29,7 +29,7 @@ public class Level : MonoBehaviour
     }
 
 
-    float _money = 10;
+    float _money = 100;
     public float moneyPerPackage = 1;
 
     public float money
@@ -42,6 +42,10 @@ public class Level : MonoBehaviour
         {
             _money = value;
             moneyText.text = value.ToString();
+            foreach (var item in shops)
+            {
+                item.checkValidity();
+            }
         }
     }
 
@@ -58,6 +62,9 @@ public class Level : MonoBehaviour
     public GameObject loseCanvas;
     public int currentComplaints;
 
+    public Shop[] shops;
+
+
     void Start()
     {
         thisM = GameManager.thisM;
@@ -65,6 +72,11 @@ public class Level : MonoBehaviour
         powerSlider.maxValue = _powerLevel;
         powerSlider.value = _powerLevel;
         moneyText.text = _money.ToString();
+        foreach (var item in shops)
+        {
+            item.checkValidity();
+        }
+
         InvokeRepeating("randomOrder", 5f, OrderInterval);
         InvokeRepeating("powerInput", 5f, PowerInterval);
 
@@ -102,7 +114,7 @@ public class Level : MonoBehaviour
 
     public void powerInput()
     {
-        Debug.Log("Power Step: ");
+        //Debug.Log("Power Step: ");
         foreach (var item in powerSources)
         {
             if (_powerLevel < maxPowerLevel)
