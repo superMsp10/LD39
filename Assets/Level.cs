@@ -13,7 +13,8 @@ public class Level : MonoBehaviour
     public House[] houses;
     public Camera currCamera;
 
-    float _powerLevel = 10;
+    public float maxPowerLevel = 100;
+    public float _powerLevel = 10;
     public float powerLevel
     {
         get
@@ -45,9 +46,12 @@ public class Level : MonoBehaviour
     }
 
     public float OrderInterval;
-    public int complainOrderNum = 2;
+    public float PowerInterval;
 
+    public int complainOrderNum = 2;
     public int ordersAmountLevel = 1;
+
+    public List<PowerSource> powerSources;
 
     void Start()
     {
@@ -57,7 +61,10 @@ public class Level : MonoBehaviour
         powerSlider.value = _powerLevel;
         moneyText.text = _money.ToString();
         InvokeRepeating("randomOrder", 5f, OrderInterval);
+        InvokeRepeating("powerInput", 5f, PowerInterval);
+
         //houses = FindObjectsOfType<House>();
+        //powerSources = new List<PowerSource>(FindObjectsOfType<PowerSource>());
     }
 
     public void randomOrder()
@@ -80,5 +87,19 @@ public class Level : MonoBehaviour
         ordersAmountLevel++;
     }
 
-
+    public void powerInput()
+    {
+        Debug.Log("Power Step: ");
+        foreach (var item in powerSources)
+        {
+            if (_powerLevel < maxPowerLevel)
+            {
+                powerLevel += item.powerIncrement;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 }
