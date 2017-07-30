@@ -7,6 +7,8 @@ public class Cannon : MonoBehaviour
 {
     public GameObject cannonCamera;
     public GameObject cannonBarrel;
+    public GameObject powerError;
+
 
     public GameObject cannonCanvas;
     public SimpleMouseRotator mouseFollow;
@@ -25,6 +27,8 @@ public class Cannon : MonoBehaviour
     public float launchForce;
     public Object launchObject;
 
+    bool enoughPower = true;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Player"))
@@ -42,15 +46,17 @@ public class Cannon : MonoBehaviour
                 exitCannon();
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (enoughPower)
             {
-                startHold();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    startHold();
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    endHold();
+                }
             }
-            if (Input.GetMouseButtonUp(0))
-            {
-                endHold();
-            }
-
         }
     }
 
@@ -79,6 +85,21 @@ public class Cannon : MonoBehaviour
         g.GetComponent<Rigidbody>().AddForce(cannonCamera.transform.forward * force);
 
         GameManager.thisM.currLvl.powerLevel -= powerConsumption;
+        powerCheck();
+    }
+
+    void powerCheck()
+    {
+        if (GameManager.thisM.currLvl.powerLevel < powerConsumption)
+        {
+            powerError.SetActive(true);
+            enoughPower = false;
+        }
+        else
+        {
+            powerError.SetActive(false);
+            enoughPower = true;
+        }
     }
 
     void exitCannon()
@@ -104,6 +125,8 @@ public class Cannon : MonoBehaviour
 
         player.SetActive(false);
         operating = true;
+
+        powerCheck();
     }
 
 
