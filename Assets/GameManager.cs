@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public string[] levelScenes;
     public string startScene, uiScene, endScene;
     public Level currLvl;
+    public int loseComplaintNum = 5;
+    public int totalComplaints = 0;
 
     // Use this for initialization
     void Awake()
@@ -24,6 +26,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    public void Lose()
+    {
+        
     }
 
     public void restartLevel()

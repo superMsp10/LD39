@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
     public Text moneyText;
 
     public House[] houses;
+    public Camera currCamera;
 
     float _powerLevel = 10;
     public float powerLevel
@@ -43,6 +44,11 @@ public class Level : MonoBehaviour
         }
     }
 
+    public float OrderInterval;
+    public int complainOrderNum = 2;
+
+    public int ordersAmountLevel = 1;
+
     void Start()
     {
         thisM = GameManager.thisM;
@@ -50,8 +56,28 @@ public class Level : MonoBehaviour
         powerSlider.maxValue = _powerLevel;
         powerSlider.value = _powerLevel;
         moneyText.text = _money.ToString();
-
+        InvokeRepeating("randomOrder", 5f, OrderInterval);
         //houses = FindObjectsOfType<House>();
+    }
+
+    public void randomOrder()
+    {
+
+        Debug.Log("Order Step: " + ordersAmountLevel);
+        for (int i = 0; i < ordersAmountLevel; i++)
+        {
+            Debug.Log("Order Level: " + i);
+
+            if (Random.Range(0, i) < 2)
+            {
+                houses[Random.Range(0, houses.Length)].Order();
+            }
+            else
+            {
+                break;
+            }
+        }
+        ordersAmountLevel++;
     }
 
 

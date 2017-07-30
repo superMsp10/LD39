@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
+    public GameObject exclamationMark;
+    public Material exclamation_black;
+    public Material exclamation_red;
+    int ordered = 0;
 
     // Use this for initialization
     void Start()
@@ -30,5 +34,23 @@ public class House : MonoBehaviour
     public void packageReceived()
     {
         GameManager.thisM.currLvl.money += GameManager.thisM.currLvl.moneyPerPackage;
+        exclamationMark.SetActive(false);
+        ordered = 0;
+    }
+
+    public void Order()
+    {
+        ordered ++;
+        exclamationMark.SetActive(true);
+
+        if(ordered >= GameManager.thisM.currLvl.complainOrderNum)
+        {
+            exclamationMark.GetComponent<Renderer>().material = exclamation_red;
+            GameManager.thisM.totalComplaints++;
+        }
+        else
+        {
+            exclamationMark.GetComponent<Renderer>().material = exclamation_black;
+        }
     }
 }

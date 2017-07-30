@@ -113,6 +113,8 @@ public class Cannon : MonoBehaviour
         player.transform.position = playerExit.position;
         player.SetActive(true);
         operating = false;
+
+        GameManager.thisM.currLvl.currCamera = Camera.main;
     }
 
     void enterCannon()
@@ -127,6 +129,8 @@ public class Cannon : MonoBehaviour
         operating = true;
 
         powerCheck();
+        GameManager.thisM.currLvl.currCamera = cannonCamera.GetComponent<Camera>();
+
     }
 
 
