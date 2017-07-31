@@ -41,7 +41,7 @@ public class Cannon : MonoBehaviour
     {
         if (operating)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 exitCannon();
             }

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         if (thisM == null)
         {
             thisM = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
         }
         else
         {
