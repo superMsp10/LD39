@@ -29,7 +29,7 @@ public class Level : MonoBehaviour
     }
 
 
-    float _money = 10000;
+    float _money = 100;
     public float moneyPerPackage = 1;
 
     public float money
@@ -64,6 +64,7 @@ public class Level : MonoBehaviour
 
     public Shop[] shops;
 
+    public Text complaintsTxt;
 
     void Start()
     {
@@ -86,13 +87,14 @@ public class Level : MonoBehaviour
 
     public void randomOrder()
     {
+        currentComplaints = 0;
         foreach (var item in houses)
         {
             var diff = item.ordered - GameManager.thisM.currLvl.complainOrderNum;
             if (diff > 0)
                 currentComplaints += diff;
         }
-
+        complaintsTxt.text = currentComplaints.ToString();
         if (currentComplaints >= GameManager.thisM.loseComplaintNum) Lose();
 
         Debug.Log("Order Step: " + ordersAmountLevel);
